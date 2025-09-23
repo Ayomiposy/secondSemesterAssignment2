@@ -1,0 +1,274 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 30px 80px;
+  background-color: #ffffff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* max-width: 1440px; */
+  margin: 0 auto;
+  border-bottom: 4px solid #e4e4e4;
+  padding-bottom: 30px;
+  margin-bottom: 62px;
+}
+
+.logo {
+  width: 150px;
+  height: 20px;
+}
+
+.cart {
+  width: 54px;
+}
+
+.cartCount {
+  font-family: Archivo;
+  font-weight: 700;
+  color: #fff;
+  font-size: 20px;
+  margin-top: -20px;
+  margin-left: 50px;
+}
+
+/* Top product section */
+
+.top-product {
+  margin: 0 auto;
+  /* max-width: 1440px; */
+  padding-bottom: 60px;
+  border-bottom: solid #e4e4e4 4px;
+  margin-bottom: 62px;
+}
+
+.top-product .title {
+  font-family: Archivo;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.product-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 62px;
+  align-items: center;
+}
+
+.add-to-cart-button {
+  width: 257px;
+  height: 47px;
+  background-color: #000;
+  color: #fff;
+  font-family: Archivo;
+  font-size: 23px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.product-image {
+  width: 100%;
+  margin-bottom: 62px;
+}
+
+.product-description {
+  display: flex;
+  gap: 32px;
+  justify-content: space-between;
+}
+
+.product-description .about {
+  width: 60%;
+}
+
+.featured-items {
+  width: 40%;
+}
+
+.about h2,
+.featured-items h2,
+.featured-items p > span {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: Archivo;
+  line-height: 190%;
+}
+
+.about span {
+  color: #656565;
+}
+
+.about p {
+  width: 100%;
+  font-family: Archivo;
+  font-size: 18px;
+  letter-spacing: 0%;
+  font-weight: 400;
+  color: #656565;
+  line-height: 200%;
+}
+
+.featured-items {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 20px;
+}
+
+.featured-items p {
+  text-align: end;
+  font-size: 16px;
+  line-height: 200%;
+  color: #656565;
+  font-family: Archivo;
+}
+
+.product-img-list {
+  display: flex;
+  gap: 30px;
+}
+
+.product-img-list img {
+  width: 117px;
+}
+
+.popup {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 417px;
+  gap: 20px;
+  top: 12%;
+  left: 74%;
+  background: #fff;
+  font-family: Archivo;
+  padding: 16px 24px;
+  border: 1px solid #ddd;
+  border: #e4e4e4;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: #c2c2c2 1px solid;
+}
+
+.popup-content img {
+  width: 149px;
+  height: 87px;
+}
+
+.popup p {
+  width: 45%;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.close-popup {
+  font-size: 23px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* product Listing section */
+
+.product-list-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  font-family: Archivo;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.product-list-top span {
+  font-weight: 400;
+  color: #9b9b9b;
+}
+
+.sorting-category {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 400;
+  gap: 10px;
+}
+
+.sorting-category img {
+  width: 20px;
+}
+
+.sorting-category .arrow-img {
+  width: 7px;
+  height: 14.5px;
+}
+
+.sort {
+  color: #9b9b9b;
+}
+
+.product-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+aside {
+  width: 30%;
+}
+
+.product-grid {
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.product-grid img {
+  width: 100%;
+  height: 400px;
+}
+
+/* media query for large screen */
+
+@media (min-width: 2000px) {
+  .product-description .about {
+    width: 60%;
+  }
+
+  .featured-items {
+    width: 40%;
+  }
+
+  .featured-items p,
+  .about p {
+    font-size: 2rem;
+  }
+
+  .about h2,
+  .featured-items h2,
+  .featured-items p > span {
+    font-size: 3rem;
+  }
+
+  .product-img-list img {
+    width: 10rem;
+  }
+
+  .popup {
+    top: 6%;
+    left: 87%;
+  }
+}

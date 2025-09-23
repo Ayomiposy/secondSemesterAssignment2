@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Bejamas</title>
+  </head>
+  <body>
+    <header class="nav">
+      <img class="logo" src="./images/logo.png" alt="logo" />
+      <div>
+        <img class="cart" src="./images/cart icon.png" alt="cart icon" />
+        <div class="cartCount"></div>
+      </div>
+    </header>
+
+    <!-- Top Preduct -->
+    <section class="top-product">
+      <div class="product-title">
+        <h1 class="title">Samurai King Resting</h1>
+        <button class="add-to-cart-button" data-id="0">ADD TO CART</button>
+      </div>
+
+      <!-- Add display product image -->
+      <img class="product-image" src="./images/dog.png" alt="dog" />
+
+      <!-- product description -->
+      <div class="product-description">
+        <div class="about">
+          <h2>
+            About the Samurai King Resting <br />
+            <span>Pets</span>
+          </h2>
+          <p>
+            So how did the classical Latin become so incoherent? According to
+            McClintock, a 15th century typesetter likely scrambled part of
+            Cicero's De Finibus in order to provide placeholder text to mockup
+            various fonts for a type specimen book.So how did the classical
+            Latin become so incoherent? According to McClintock, a 15th century
+            typesetter likely scrambled part of Cicero's De Finibus in order to
+            provide placeholder text to mockup various fonts for a type specimen
+            book.So how did the classical Latin become so incoherent? According
+            to McClintock.
+          </p>
+        </div>
+
+        <div class="featured-items">
+          <h2>People also buy</h2>
+          <div class="product-img-list">
+            <img src="./images/Rectangle 10.png" alt="featured item" />
+            <img src="./images/Rectangle 10.1.png" alt="featured item" />
+            <img src="./images/red-bench.png" alt="featured item 3" />
+          </div>
+          <p class="details">
+            <span>Details</span> <br />Size: 1020 x 1020 pixel <br />
+            Size: 15 mb
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="product">
+      <div class="product-list-top">
+        <h2>Photography /<span> Premium Photos</span></h2>
+        <div class="sorting-category">
+          <div>
+            <img
+              class="arrow-img"
+              src="./images/arrows/arrowup.png"
+              alt="small arrow up"
+            />
+            <img
+              class="arrow-img"
+              src="./images/arrows/arrowdown.png"
+              alt="small arrow down"
+            />
+          </div>
+          <p class="sort">Sort By</p>
+          <p class="price">
+            Price <span><img src="./images/sort.png" alt="" /></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="product-list">
+        <aside>
+          <h2>Category</h2>
+          <div class="category">
+            <label for="People"
+              ><input type="checkbox" value="People" />People</label
+            ><br />
+            <label for="Premium"
+              ><input type="checkbox" value="Premium" />Premium</label
+            ><br />
+            <label for="Pets"
+              ><input type="checkbox" value="checkbox" />Pets</label
+            ><br />
+            <label for="Food"><input type="checkbox" value="Food" />Food</label
+            ><br />
+            <label for="Landmarks"
+              ><input type="checkbox" value="Landmarks" />Landmarks</label
+            ><br />
+            <label for="Cities"
+              ><input type="checkbox" value="Cities" />Cities</label
+            ><br />
+            <label for="Nature"
+              ><input type="checkbox" value="Nature" />Nature</label
+            ><br />
+          </div>
+
+          <h2>Price</h2>
+          <div class="price">
+            <label for="Lower than $20"
+              ><input type="checkbox" value="Lower than $20" />Lower than $20 </label
+            ><br />
+            <label for="$20 - $100"
+              ><input type="checkbox" value="$20 - $100" />$20 - $100</label
+            ><br />
+            <label for="$100 - $200"
+              ><input type="checkbox" value="$100 - $200" />$100 - $200</label
+            ><br />
+            <label for="More than $200"
+              ><input type="checkbox" value="More than $200" />More than
+              $200</label
+            >
+          </div>
+        </aside>
+
+        <div class="product-grid"></div>
+      </div>
+    </section>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
