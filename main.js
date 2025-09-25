@@ -1,6 +1,12 @@
 const cartButton = document.querySelectorAll(".add-to-cart-button");
 const cartCount = document.querySelector(".cartCount");
 const productGrid = document.querySelector(".product-grid");
+const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
+const pageNum = document.querySelectorAll(".num");
+const nextPage = document.querySelector(".arrow-right");
+const backPage = document.querySelector(".arrow-left");
+const mobileFilter = document.querySelector(".mobile-filter");
+
 
 // Product List
 
@@ -27,6 +33,7 @@ const products = [
     image: "./images/egg-baloon.png",
     category: "Food",
     price: 93.89,
+    range: "$20 - $100",
   },
 
   {
@@ -42,7 +49,7 @@ const products = [
     name: "Man",
     image: "./images/Man.png",
     category: "People",
-    price: 100,
+    price: 100.0,
   },
 
   {
@@ -50,17 +57,25 @@ const products = [
     name: "Architecture",
     image: "./images/Architecture.png",
     category: "Landmarks",
-    price: 101,
+    price: 101.0,
+  },
+
+  {
+    id: 6,
+    name: "Architecture",
+    image: "./images/Architecture.png",
+    category: "Landmarks",
+    price: 101.0,
   },
 ];
 
 // Handle Event Listener on my object
-// cartButton.forEach((button) => {
-//   button.addEventListener("click", (e) => {
-//     const productId = e.target.dataset.id;
-//     addToCart(productId);
-//   });
-// });
+cartButton.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const productId = e.target.dataset.id;
+    addToCart(productId);
+  });
+});
 
 // Handle add to cart and push to cart
 let cart = [];
@@ -106,19 +121,114 @@ function updateCartCount() {
 }
 
 // Rendering Product
-products.forEach((product) => {
-  product.id > 0 &&
-    (productGrid.innerHTML += `
+function renderProduct(filteredProduct = products) {
+  // clear the first rendering before filtering.
+  productGrid.innerHTML = "";
+
+  filteredProduct.forEach((product) => {
+    product.id > 0 &&
+      (productGrid.innerHTML += `
     <div class="grid">
       <img src=${product.image} />
-      <button class="add-to-cart-button" data-id${product.id}>ADD TO CART</button>
+      <button class="add-to-cart-button" data-id=${
+        product.id
+      }>ADD TO CART</button>
       <p>${product.category}</p>
-      <p>${product.name}</p>
-      <p>${product.price}</p>
+      <p class="product-grid-name">${product.name}</p>
+      <p class="product-grid-price">$${parseFloat(product.price).toFixed(2)}</p>
     </div>
   `);
-});
+  });
+}
+
+renderProduct();
 
 // Add event liostener to photogrid so that it works anytime
+productGrid.addEventListener("click", (e) => {
+  if (e.target.classList.contains("add-to-cart-button")) {
+    const productId = e.target.dataset.id;
+    addToCart(productId);
+  }
+});
 
-productGrid.addEventListener;
+// Handle Checkbox changes
+checkBoxes.forEach((checkbox) =>
+  checkbox.addEventListener("change", filteredProduct)
+);
+
+function filteredProduct() {
+  const selected = Array.from(checkBoxes)
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.value);
+
+  if (selected.length === 0) {
+    renderProduct(products);
+  } else {
+    const filtered = products.filter((product) =>
+      selected.includes(product.category)
+    );
+    renderProduct(filtered);
+  }
+}
+
+
+// Handle pagination
+
+
+function activePage(page) {
+  pageNum.forEach((p, index) => {
+    if(index + 1 === page) {
+      p.classList.add("active");
+    } else {
+      p.classList.remove("active");
+    }
+  });
+}
+
+let currentPage = 1;
+
+// Handle clicked page number 
+pageNum.forEach((page, index) => {
+  page.addEventListener("click", () => {
+    currentPage = index + 1
+    activePage(currentPage);
+  })
+})
+
+// Handle Next Page
+nextPage.addEventListener("click", () => {
+  if(currentPage < pageNum.length) {
+    currentPage++
+  }
+  activePage(currentPage)
+})
+
+// Handle Back Page
+backPage.addEventListener("click", () => {
+  if(currentPage > 1) {
+    currentPage--;
+    activePage(currentPage);
+  }
+})
+
+// Handle Mobile menu
+const filterMenu = document.querySelector("aside").innerHTML;
+console.log(filterMenu);
+
+function mobileMenu () {
+  const menu = document.createElement("div")
+  menu.classList.add("Mobile-filter-menu")
+  menu.innerHTML = ` 
+  ${filterMenu}
+  <div>
+  <button class="close-menu">CLOSE</button>
+  <button class="save-menu">SAVE</button>
+  </div>`
+
+  document.body.appendChild(menu);
+
+  // close Menu
+  menu.querySelector(".close-menu").addEventListener("click", () => {
+    menu.remove();
+  })
+}

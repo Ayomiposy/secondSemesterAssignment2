@@ -63,6 +63,13 @@
     <section class="product">
       <div class="product-list-top">
         <h2>Photography /<span> Premium Photos</span></h2>
+        <!-- Mobile sort toggle icon -->
+        <img
+          class="mobile-filter"
+          src="./images/mobilefilter_icon.png"
+          alt="Mobile filter toggle"
+          onclick="mobileMenu()"
+        />
         <div class="sorting-category">
           <div>
             <img
@@ -88,41 +95,63 @@
           <h2>Category</h2>
           <div class="category">
             <label for="People"
-              ><input type="checkbox" value="People" />People</label
+              ><input type="checkbox" id="People" value="People" />
+              <span class="custom-checkbox"></span>People</label
             ><br />
             <label for="Premium"
-              ><input type="checkbox" value="Premium" />Premium</label
+              ><input type="checkbox" id="Premium" value="Premium" />
+              <span class="custom-checkbox"></span>Premium</label
             ><br />
             <label for="Pets"
-              ><input type="checkbox" value="checkbox" />Pets</label
+              ><input type="checkbox" id="Pets" value="checkbox" />
+              <span class="custom-checkbox"></span>Pets</label
             ><br />
-            <label for="Food"><input type="checkbox" value="Food" />Food</label
+            <label for="Food"
+              ><input type="checkbox" id="Food" value="Food" />
+              <span class="custom-checkbox"></span>Food</label
             ><br />
             <label for="Landmarks"
-              ><input type="checkbox" value="Landmarks" />Landmarks</label
+              ><input type="checkbox" id="Landmarks" value="Landmarks" />
+              <span class="custom-checkbox"></span>Landmarks</label
             ><br />
             <label for="Cities"
-              ><input type="checkbox" value="Cities" />Cities</label
+              ><input type="checkbox" id="Cities" value="Cities" />
+              <span class="custom-checkbox"></span>Cities</label
             ><br />
             <label for="Nature"
-              ><input type="checkbox" value="Nature" />Nature</label
+              ><input type="checkbox" id="Nature" value="Nature" />
+              <span class="custom-checkbox"></span>Nature</label
             ><br />
           </div>
 
           <h2>Price</h2>
           <div class="price">
             <label for="Lower than $20"
-              ><input type="checkbox" value="Lower than $20" />Lower than $20 </label
+              ><input
+                type="checkbox"
+                id="Lower than $20"
+                value="Lower than $20"
+              /><span class="custom-checkbox"></span>Lower than $20 </label
             ><br />
             <label for="$20 - $100"
-              ><input type="checkbox" value="$20 - $100" />$20 - $100</label
+              ><input type="checkbox" id="$20 - $100" value="$20 - $100" /><span
+                class="custom-checkbox"
+              ></span
+              >$20 - $100</label
             ><br />
             <label for="$100 - $200"
-              ><input type="checkbox" value="$100 - $200" />$100 - $200</label
+              ><input
+                type="checkbox"
+                id="$100 - $200"
+                value="$100 - $200"
+              /><span class="custom-checkbox"></span>$100 - $200</label
             ><br />
             <label for="More than $200"
-              ><input type="checkbox" value="More than $200" />More than
-              $200</label
+              ><input
+                type="checkbox"
+                id="More than $200"
+                value="More than $200"
+              /><span class="custom-checkbox"></span>More than $200</label
             >
           </div>
         </aside>
@@ -130,6 +159,15 @@
         <div class="product-grid"></div>
       </div>
     </section>
+
+    <footer class="pagination">
+      <div class="arrow-left">⬅</div>
+      <p class="num">1</p>
+      <p class="num">2</p>
+      <p class="num">3</p>
+      <p class="num">4</p>
+      <div class="arrow-right">➡</div>
+    </footer>
 
     <script src="./main.js"></script>
   </body>
