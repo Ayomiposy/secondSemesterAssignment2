@@ -7,7 +7,6 @@ const nextPage = document.querySelector(".arrow-right");
 const backPage = document.querySelector(".arrow-left");
 const mobileFilter = document.querySelector(".mobile-filter");
 
-
 // Product List
 
 const products = [
@@ -117,13 +116,21 @@ function updateCartCount() {
   cartCount.style.padding = "2px 6px";
   cartCount.style.backgroundColor = "black";
   cartCount.textContent = cart.length;
-  console.log(cartCount);
 }
 
 // Rendering Product
 function renderProduct(filteredProduct = products) {
   // clear the first rendering before filtering.
   productGrid.innerHTML = "";
+
+  if (window.innerWidth <= 768) {
+    const seen = new Set();
+    filteredProduct = filteredProduct.filter((product) => {
+      if (seen.has(product.name)) return false; // skip duplicates
+      seen.add(product.name);
+      return true;
+    });
+  }
 
   filteredProduct.forEach((product) => {
     product.id > 0 &&
@@ -143,7 +150,12 @@ function renderProduct(filteredProduct = products) {
 
 renderProduct();
 
-// Add event liostener to photogrid so that it works anytime
+// Render when screen is resize
+window.addEventListener("resize", () => {
+  renderProduct();
+});
+
+// Add event listener to photogrid so that it works anytime
 productGrid.addEventListener("click", (e) => {
   if (e.target.classList.contains("add-to-cart-button")) {
     const productId = e.target.dataset.id;
@@ -153,7 +165,15 @@ productGrid.addEventListener("click", (e) => {
 
 // Handle Checkbox changes
 checkBoxes.forEach((checkbox) =>
-  checkbox.addEventListener("change", filteredProduct)
+  checkbox.addEventListener("change", () => {
+    const tick = document.querySelectorAll(".custom-checkbox");
+    tick.forEach((tick) => {
+      tick.src = tick.parentElement.querySelector("input").checked
+        ? "./images/tick-mark.png"
+        : "./images/tick.png";
+    });
+    filteredProduct();
+  })
 );
 
 function filteredProduct() {
@@ -171,13 +191,11 @@ function filteredProduct() {
   }
 }
 
-
 // Handle pagination
-
 
 function activePage(page) {
   pageNum.forEach((p, index) => {
-    if(index + 1 === page) {
+    if (index + 1 === page) {
       p.classList.add("active");
     } else {
       p.classList.remove("active");
@@ -187,48 +205,175 @@ function activePage(page) {
 
 let currentPage = 1;
 
-// Handle clicked page number 
+// Handle clicked page number
 pageNum.forEach((page, index) => {
   page.addEventListener("click", () => {
-    currentPage = index + 1
+    currentPage = index + 1;
     activePage(currentPage);
-  })
-})
+  });
+});
 
 // Handle Next Page
 nextPage.addEventListener("click", () => {
-  if(currentPage < pageNum.length) {
-    currentPage++
+  if (currentPage < pageNum.length) {
+    currentPage++;
   }
-  activePage(currentPage)
-})
+  activePage(currentPage);
+});
 
 // Handle Back Page
 backPage.addEventListener("click", () => {
-  if(currentPage > 1) {
+  if (currentPage > 1) {
     currentPage--;
     activePage(currentPage);
   }
-})
+});
 
 // Handle Mobile menu
-const filterMenu = document.querySelector("aside").innerHTML;
-console.log(filterMenu);
 
-function mobileMenu () {
-  const menu = document.createElement("div")
-  menu.classList.add("Mobile-filter-menu")
-  menu.innerHTML = ` 
-  ${filterMenu}
-  <div>
-  <button class="close-menu">CLOSE</button>
-  <button class="save-menu">SAVE</button>
-  </div>`
+// function mobileMenu() {
+//   const menu = document.createElement("div");
+//   menu.classList.add("Mobile-filter-menu");
+
+//   const filterMenu = document.querySelector("aside").cloneNode(true);
+//   menu.appendChild(filterMenu);
+
+//   const actionButtons = document.createElement("div");
+//   actionButtons.classList.add("action-buttons");
+//   actionButtons.innerHTML = `
+//   <button class="close-menu">CLEAR</button>
+//   <button class="save-menu">SAVE</button>
+//  `;
+
+//   menu.appendChild(actionButtons);
+
+//   // Change category heading to Filter
+//   const categoryTitle = menu.querySelector(".category-title");
+//   categoryTitle.textContent = "Filter";
+//   console.log(categoryTitle);
+
+//   document.body.appendChild(menu);
+
+//   // close Menu
+//   menu.querySelector(".close-menu").addEventListener("click", () => {
+//     renderProduct(products);
+//     menu.remove();
+//   });
+
+//   // save Menu
+//   menu.querySelector(".save-menu").addEventListener("click", () => {
+//     const checkboxes = menu.querySelectorAll("input[type=checkbox]");
+//     const selected = Array.from(checkboxes)
+//       .filter((cb) => cb.checked)
+//       .map((cb) => cb.value);
+
+//     if (selected.length > 0) {
+//       const filtered = products.filter((product) =>
+//         selected.includes(product.category)
+//       );
+//       renderProduct(filtered);
+//     } else {
+//       // renderProduct(products);
+//     }
+
+//     menu.remove();
+//   });
+// }
+
+function mobileMenu() {
+  const menu = document.createElement("div");
+  menu.classList.add("Mobile-filter-menu");
+
+  const filterMenu = document.querySelector("aside").cloneNode(true);
+
+  const clonedInputs = filterMenu.querySelectorAll('input[type="checkbox"]');
+  clonedInputs.forEach((input, i) => {
+    const base = input.id || "mobile-checkbox";
+    input.id = `${base}-mobile-${Date.now()}-${i}`;
+  });
+
+  const clonedLabels = filterMenu.querySelectorAll("label[for]");
+  clonedLabels.forEach((label) => label.removeAttribute("for"));
+
+  menu.appendChild(filterMenu);
+
+  const actionButtons = document.createElement("div");
+  actionButtons.classList.add("action-buttons");
+  actionButtons.innerHTML = `
+    <button class="close-menu">CLEAR</button>
+    <button class="save-menu">SAVE</button>
+  `;
+  menu.appendChild(actionButtons);
+
+  // Change category heading to Filter if present
+  const categoryTitle = menu.querySelector(".category-title");
+  if (categoryTitle) categoryTitle.textContent = "Filter";
 
   document.body.appendChild(menu);
 
-  // close Menu
+  // Check filtered menu
+
+  function filterMobileProducts() {
+    const checkboxes = menu.querySelectorAll("input[type=checkbox]");
+    const selected = Array.from(checkboxes)
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value);
+
+    if (selected.length > 0) {
+      const filtered = products.filter((product) =>
+        selected.includes(product.category)
+      );
+      renderProduct(filtered);
+    } else {
+      renderProduct(products);
+    }
+  }
+
+  const mobileCheckBoxes = menu.querySelectorAll('input[type="checkbox"]');
+  mobileCheckBoxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      const label = checkbox.closest("label");
+      if (label) {
+        const tickImg = label.querySelector(".custom-checkbox");
+        if (tickImg)
+          tickImg.src = checkbox.checked
+            ? "./images/tick-mark.png"
+            : "./images/tick.png";
+      } else {
+        // fallback: update all ticks inside the menu
+        const allTicks = menu.querySelectorAll(".custom-checkbox");
+        allTicks.forEach((t) => {
+          const inputEl = t.parentElement.querySelector("input");
+          t.src =
+            inputEl && inputEl.checked
+              ? "./images/tick-mark.png"
+              : "./images/tick.png";
+        });
+      }
+
+      // now filter using the cloned menu's state
+      filterMobileProducts();
+    });
+  });
+
+  // CLEAR button: 
   menu.querySelector(".close-menu").addEventListener("click", () => {
+    const checkboxes = menu.querySelectorAll("input[type=checkbox]");
+    checkboxes.forEach((cb) => {
+      cb.checked = false;
+      const label = cb.closest("label");
+      if (label) {
+        const tickImg = label.querySelector(".custom-checkbox");
+        if (tickImg) tickImg.src = "./images/tick.png";
+      }
+    });
+    renderProduct(products);
     menu.remove();
-  })
+  });
+
+  // SAVE button: apply filter (already applied live, but keep behavior) and close
+  menu.querySelector(".save-menu").addEventListener("click", () => {
+    filterMobileProducts();
+    menu.remove();
+  });
 }

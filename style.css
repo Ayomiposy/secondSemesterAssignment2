@@ -139,7 +139,7 @@ header {
 }
 
 .product-img-list img {
-  width: 70px;
+  width: 0px;
 }
 
 .popup {
@@ -248,26 +248,15 @@ label input[type="checkbox"] {
   display: none;
 }
 
-.custom-checkbox {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #000;
-  border-radius: 4px;
-  background: white;
-  margin-right: 8px;
-  position: relative;
-  vertical-align: middle;
-  cursor: pointer;
+label {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
 }
 
-label input[type="checkbox"]:checked + .custom-checkbox::after {
-  content: "✔";
-  position: absolute;
-  top: -3px;
-  left: 2px;
-  font-size: 16px;
-  color: black;
+label img {
+  width: 23px;
 }
 
 .product-grid {
@@ -332,8 +321,12 @@ label input[type="checkbox"]:checked + .custom-checkbox::after {
 }
 
 .num.active {
-  color: #B4B4B4;
+  color: #b4b4b4;
   font-weight: bold;
+}
+
+.pagination img {
+  width: 8px;
 }
 
 /* Mobile responsiveness */
@@ -409,8 +402,63 @@ label input[type="checkbox"]:checked + .custom-checkbox::after {
     display: none;
   }
 
-  aside.h2{
-    display: none;
+  .Mobile-filter-menu {
+    position: absolute;
+    top: 180vh;
+    background: white;
+    width: calc(100% - 80px);
+  }
+
+  .Mobile-filter-menu aside {
+    display: flex;
+    gap: 10px !important;
+    width: 100%;
+    height: 400px;
+    overflow-y: scroll;
+    padding: 10px;
+  }
+
+  .Mobile-filter-menu aside .category {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .Mobile-filter-menu aside label {
+    margin: 0px;
+    font-size: 18px;
+  }
+
+  .Mobile-filter-menu h2 {
+    font-size: 24px;
+  }
+
+  .Mobile-filter-menu .action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-top: #e4e4e4 solid 3px;
+    height: 90px;
+  }
+
+  .close-menu,
+  .save-menu {
+    width: 177px;
+    border: #000 solid 3px;
+    font-size: 23px;
+    font-family: Archivo;
+    font-weight: 500;
+    letter-spacing: 7%;
+    text-align: center;
+    background-color: #000;
+    color: white;
+    height: 48px;
+  }
+
+  .close-menu {
+    color: #000;
+    background-color: #fff;
   }
 
   .product-grid {
@@ -422,6 +470,11 @@ label input[type="checkbox"]:checked + .custom-checkbox::after {
   .popup {
     top: 10%;
     left: 8%;
+  }
+
+  .cart {
+    width: 40px;
+    margin-top: -20px;
   }
 }
 
